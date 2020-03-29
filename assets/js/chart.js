@@ -1,11 +1,11 @@
 
-function chart(data_covid) {
+function pie_chart(data_covid, elm) {
     let sembuh_warna = 'rgba(8,65,119,1)';
     let mati_warna = 'rgba(205,141,123,1)';
     let proses_warna = 'rgba(251,196,144,1)';
     // let proses = data_covid.confirmed - (data_covid.deaths + data_covid.recovered);
 
-    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById(elm).getContext('2d');
     data = {
         datasets: [{
             data: [data_covid.cases.active, data_covid.deaths.total, data_covid.cases.recovered],
@@ -37,7 +37,10 @@ function chart(data_covid) {
             },
         }
     });
+}
 
+function chart(data_covid) {
+    pie_chart(data_covid, 'myChart');
     let kasus_bertambah = data_covid.cases.new == null ? 0 : data_covid.cases.new;
     let kasus_meninggal = data_covid.deaths.new == null ? 0 : data_covid.deaths.new;
 

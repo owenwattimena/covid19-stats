@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +12,7 @@
     <title>COVID-19 Stats - INDONESIA & WORD!</title>
 </head>
 <body>
+    
     <!-- As a link -->
     <nav class="navbar navbar-light my-bg">
         <a class="navbar-brand my-text-color" href=""><span class="my-text-color">COVID-19</span></a>
@@ -58,21 +59,43 @@
         
         <div class="row">
             <div class="col-lg-4">
-                <div class="card mb-3">
-                    <div class="card-header text-center">
-                        INDONESIA
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <canvas id="myChart"></canvas>
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-header text-center">
+                                INDONESIA
                             </div>
-                            <div class="col-lg-12">
-                                <div id="info"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div id="info"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-header text-center">
+                                MALUKU
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <canvas id="chart-maluku"></canvas>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div id="info-maluku"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <div class="col-lg-8">
                 <div class="card mb-5">
@@ -100,9 +123,23 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/detail-covid.js"></script>
     <script src="assets/js/top10.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script src="assets/js/cloud-firestore.js"></script>
+    
 </body>
-</html>
-<script>
-    detail_covid('Indonesia');
-    top10();
-</script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script> -->
+<!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    
+    <script>
+        data_maluku();
+        detail_covid('Indonesia');
+        top10();
+    </script>
+    
+    </html>
