@@ -23,7 +23,7 @@ function data_maluku() {
         .doc('maluku');
 
     // Start listening to the query.
-    query.get().then(function (doc) {
+    query.onSnapshot(function (doc) {
         if (doc.exists) {
 
             let data = {
