@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1:5500/';
+const BASE_URL = 'https://owenwattimena.github.io/covid19-stats/';
 
 $('.navbar-brand').attr('href', BASE_URL);
 $('footer').html(`
