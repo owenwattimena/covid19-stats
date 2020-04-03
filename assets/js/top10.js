@@ -1,3 +1,4 @@
+
 function top10() {
     var settings = {
         "async": true,
@@ -15,35 +16,84 @@ function top10() {
     });
 }
 
-function tabel(response) {
-    let tabel = `
-    <div class="table-responsive">
-    <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Negara</th>
-        <th scope="col">Sembuh</th>
-        <th scope="col">Meninggal</th>
-        <th scope="col">Proses</th>
-        <th scope="col">Total</th>
-      </tr>
-    </thead>
-    <tbody>`;
-    let no = 1;
-    for (let index = 0; index < 10; index++) {
-        tabel += `<tr>`;
-        tabel += `<th scope="row">` + no++ + `</th>`;
-        tabel += `<td><a href='` + BASE_URL + `negara.html?detail=` + response[index].country + `' >` + response[index].country + `</a></td>`;
-        tabel += `<td>` + response[index].cases.recovered + `</td>`;
-        tabel += `<td>` + response[index].deaths.total + `</td>`;
-        tabel += `<td>` + response[index].cases.active + `</td>`;
-        tabel += `<td>` + response[index].cases.total + `</td>`;
+function getCountryCode(countryList, country) {
+    let code;
+
+    for (let i = 0; i < countryList.length; i++) {
+        if (country == countryList[i].name) {
+            code = countryList[i].code;
+            break;
+        }
     }
 
-    tabel += `
-    </tbody>
-    </table>
-    </div>`;
-    $('#top10').html(tabel);
+    return code;
+}
+
+function tabel(response) {
+    $.getJSON("../assets/json/countries.json",
+        function (countryList, textStatus, jqXHR) {
+            let allData = [];
+            let isInserted;
+            for (let i = 0; i < response.length; i++) {
+                isInserted = false;
+                let data = {
+                    'code': getCountryCode(countryList, response[i].country),
+                    'negara': response[i].country,
+                    'sembuh': response[i].cases.recovered,
+                    'meninggal': response[i].deaths.total,
+                    'aktif': response[i].cases.active,
+                    'total': response[i].cases.total
+                };
+                let allData_length = allData.length;
+                for (let j = 0; j < allData_length; j++) {
+                    if (data.total > allData[j].total) {
+                        isInserted = true;
+                        allData.splice(j, 0, data);
+                        break;
+
+                    }
+
+                }
+                if (!isInserted) {
+                    allData.push(data);
+                }
+
+            }
+
+
+            let tabel = `
+                <div class="table-responsive">
+                <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Negara</th>
+                    <th scope="col">Sembuh</th>
+                    <th scope="col">Meninggal</th>
+                    <th scope="col">Aktif</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>`;
+
+            let no = 1;
+            for (let index = 1; index <= 10; index++) {
+                console.log(allData);
+                tabel += `<tr>`;
+                tabel += `<th scope="row">` + no++ + `</th>`;
+                tabel += `<td><a href='` + BASE_URL + `negara.html?detail=` + allData[index].negara + `' ><img src="https://www.countryflags.io/` + allData[index].code + `/flat/24.png"> ` + allData[index].negara + `</a></td>`;
+                tabel += `<td>` + allData[index].sembuh + `</td>`;
+                tabel += `<td>` + allData[index].meninggal + `</td>`;
+                tabel += `<td>` + allData[index].aktif + `</td>`;
+                tabel += `<td>` + allData[index].total + `</td>`;
+            }
+
+
+            tabel += `
+            </tbody>
+            </table>
+            </div>`;
+            $('#top10').html(tabel);
+        }
+    );
 }
