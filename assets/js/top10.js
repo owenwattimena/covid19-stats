@@ -1,3 +1,16 @@
+function numberSeparator(number) {
+    var number_string = number.toString(),
+        sisa = number_string.length % 3,
+        newNumber = number_string.substr(0, sisa),
+        ribuan = number_string.substr(sisa).match(/\d{3}/g);
+
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        newNumber += separator + ribuan.join('.');
+    }
+    return newNumber;
+}
+
 
 function top10() {
     var settings = {
@@ -78,16 +91,14 @@ function tabel(response) {
 
             let no = 1;
             for (let index = 1; index <= 10; index++) {
-                console.log(allData);
                 tabel += `<tr>`;
                 tabel += `<th scope="row">` + no++ + `</th>`;
                 tabel += `<td><a href='` + BASE_URL + `negara.html?detail=` + allData[index].negara + `' ><img src="https://www.countryflags.io/` + allData[index].code + `/flat/24.png"> ` + allData[index].negara + `</a></td>`;
-                tabel += `<td>` + allData[index].sembuh + `</td>`;
-                tabel += `<td>` + allData[index].meninggal + `</td>`;
-                tabel += `<td>` + allData[index].aktif + `</td>`;
-                tabel += `<td>` + allData[index].total + `</td>`;
+                tabel += `<td>` + numberSeparator(allData[index].sembuh) + `</td>`;
+                tabel += `<td>` + numberSeparator(allData[index].meninggal) + `</td>`;
+                tabel += `<td>` + numberSeparator(allData[index].aktif) + `</td>`;
+                tabel += `<td>` + numberSeparator(allData[index].total) + `</td>`;
             }
-
 
             tabel += `
             </tbody>
