@@ -30,7 +30,7 @@ function getCountryCode(countryList, country) {
 }
 
 function tabel(response) {
-    $.getJSON("../assets/json/countries.json",
+    $.getJSON("https://owenwattimena.github.io/covid19-stats/assets/json/countries.json",
         function (countryList, textStatus, jqXHR) {
             let allData = [];
             let isInserted;
