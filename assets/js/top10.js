@@ -73,6 +73,8 @@ function tabel(response) {
 
             }
 
+            console.log(allData);
+
 
             let tabel = `
                 <div class="table-responsive">
@@ -90,7 +92,8 @@ function tabel(response) {
                 <tbody>`;
 
             let no = 1;
-            for (let index = 1; index <= 10; index++) {
+            for (let index = 2; index <= 11; index++) {
+
                 tabel += `<tr>`;
                 tabel += `<th scope="row">` + no++ + `</th>`;
                 tabel += `<td><a href='` + BASE_URL + `negara.html?detail=` + allData[index].negara + `' ><img src="https://www.countryflags.io/` + allData[index].code + `/flat/24.png"> ` + allData[index].negara + `</a></td>`;
