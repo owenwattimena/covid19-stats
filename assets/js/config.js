@@ -1,6 +1,13 @@
-const BASE_URL = 'https://owenwattimena.github.io/covid19-stats/';
+function getCountryCode(countryList, country) {
+    let code;
 
-$('.navbar-brand').attr('href', BASE_URL);
-$('footer').html(`
-<p class="text-center text-light p-2"><a href='https://owenwattimena.github.io/'>#wentoxwtt</a></p>
-`);
+    for (let i = 0; i < countryList.length; i++) {
+
+        if (country == countryList[i].name) {
+            code = countryList[i].code;
+            break;
+        }
+    }
+
+    return code;
+}
