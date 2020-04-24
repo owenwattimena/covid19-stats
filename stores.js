@@ -45,7 +45,7 @@ export const stores = new Vuex.Store({
                      * Ambil semua data Code Negara
                      */
                     fetch_data(
-                        "./assets/json/countries.json",
+                        "https://owenwattimena.github.io/covid19-stats/assets/json/countries.json",
                         "GET"
                     ).then((countries) => {
 

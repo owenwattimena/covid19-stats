@@ -36,7 +36,7 @@ export const Search = {
                 }
 
                 fetch_data(
-                    '../../assets/json/countries.json',
+                    'https://owenwattimena.github.io/covid19-stats/assets/json/countries.json',
                     'GET'
                 ).then((countries) => {
                     let search_result = []
